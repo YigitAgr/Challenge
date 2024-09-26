@@ -9,7 +9,7 @@ import lombok.Data;
 public class Order extends Base {
 
 
-
+    private int quantity;
     private int price;
 
 }
