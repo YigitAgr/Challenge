@@ -1,0 +1,15 @@
+package com.challenge.demo.model;
+
+import jakarta.persistence.*;
+import lombok.Data;
+
+@Data
+@Entity
+@Table(name = "order")
+public class Order extends Base {
+
+
+
+    private int price;
+
+}
