@@ -24,4 +24,7 @@ public class Cart extends Base{
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> order;
 
+    @OneToMany(mappedBy = "cart",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Product> products;
+
 }

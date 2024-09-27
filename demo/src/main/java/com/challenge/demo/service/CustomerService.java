@@ -1,21 +1,28 @@
 package com.challenge.demo.service;
 
+import com.challenge.demo.Dto.CartDto;
 import com.challenge.demo.Dto.CustomerDto;
 import com.challenge.demo.model.Cart;
 import com.challenge.demo.model.Customer;
+import com.challenge.demo.repository.CartRepository;
 import com.challenge.demo.repository.CustomerRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Optional;
+
 @Service
 public class CustomerService {
 
+    private final CartRepository cartRepository;
     private CustomerRepository customerRepository;
 
     @Autowired
-    public CustomerService(CustomerRepository customerRepository) {
+    public CustomerService(CustomerRepository customerRepository, CartRepository cartRepository) {
         this.customerRepository = customerRepository;
+        this.cartRepository = cartRepository;
     }
 
 
@@ -24,8 +31,31 @@ public class CustomerService {
         Cart cart = new Cart();
         customer.setCart(cart);
         cart.setCustomer(customer);
-        return customerRepository.save(customer);
+        customerRepository.save(customer);
+        cartRepository.save(cart);
+        return customer;
     }
+
+
+    public Cart GetCart(int customerid) {
+        Optional<Customer> customer = customerRepository.findById(customerid);
+        if(customer.isPresent()) {
+            System.out.println(customer.get().getCart());
+            Cart cart = customer.get().getCart();
+            System.out.println(cart);
+            return cart;
+        }else {
+            throw new EntityNotFoundException("Customer Or Cart not found");
+        }
+    }
+
+
+    public Customer findById(int customerid) {
+        return customerRepository.findById(customerid).orElse(null);
+
+    }
+
+
 
 
     public Customer toCustomer(CustomerDto customerDto) {
@@ -47,5 +77,7 @@ public class CustomerService {
 
         return customerDto;
     }
+
+
 
 }
