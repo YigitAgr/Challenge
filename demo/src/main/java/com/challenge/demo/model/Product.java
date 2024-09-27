@@ -3,6 +3,8 @@ package com.challenge.demo.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 
 @Data
 @Entity
@@ -15,4 +17,8 @@ public class Product extends Base {
     private String name;
 
     private int stock;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 }
