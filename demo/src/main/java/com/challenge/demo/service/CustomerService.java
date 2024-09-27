@@ -1,6 +1,7 @@
 package com.challenge.demo.service;
 
 import com.challenge.demo.Dto.CustomerDto;
+import com.challenge.demo.model.Cart;
 import com.challenge.demo.model.Customer;
 import com.challenge.demo.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class CustomerService {
 
     public Customer AddCustomer(CustomerDto customerDto) {
         Customer customer = toCustomer(customerDto);
+        Cart cart = new Cart();
+        customer.setCart(cart);
+        cart.setCustomer(customer);
         return customerRepository.save(customer);
     }
 

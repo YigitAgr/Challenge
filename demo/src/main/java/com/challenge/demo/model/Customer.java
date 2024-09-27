@@ -14,7 +14,6 @@ public class Customer extends Base {
     private String firstName;
 
 
-    @JsonManagedReference
     @OneToOne(mappedBy = "customer",cascade = CascadeType.ALL)
     private Cart cart;
 

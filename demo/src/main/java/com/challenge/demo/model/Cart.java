@@ -1,5 +1,7 @@
 package com.challenge.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -13,6 +15,7 @@ public class Cart extends Base{
 
     private int totalPrice;
 
+    @JsonBackReference
     @OneToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
