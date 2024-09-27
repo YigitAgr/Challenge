@@ -6,10 +6,7 @@ import com.challenge.demo.model.Cart;
 import com.challenge.demo.model.Product;
 import com.challenge.demo.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1/cart")
@@ -25,8 +22,8 @@ public class CartController {
 
 
     @PutMapping("/Addproducttocart")
-    public Cart AddProductToCart(CartDto cartDto, ProductDto productDto) {
-        return null;
+    public Cart AddProductToCart(@RequestParam int customerid,@RequestBody ProductDto productDto) {
+        return cartService.AddProductToCart(customerid,productDto);
     }
 
     @DeleteMapping("/Removeproductfromcart")
