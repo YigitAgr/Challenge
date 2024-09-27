@@ -1,9 +1,11 @@
 package com.challenge.demo.controller;
 
+import com.challenge.demo.Dto.ProductDto;
 import com.challenge.demo.model.Product;
 import com.challenge.demo.repository.ProductRepository;
 import com.challenge.demo.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,24 +22,24 @@ public class ProductController {
     @GetMapping("/Getproduct")
     public Product GetProduct(@RequestParam int id) {
 
-
         return productService.GetProduct(id);
     }
 
-   /* @PostMapping("/createproduct")
-    public Product CreateProduct(ProductDto productDto){
-        return null;
+    @PostMapping("/Createproduct")
+    public Product CreateProduct(@RequestBody ProductDto productDto){
+        return productService.CreateProduct(productDto);
     }
 
-    @PostMapping("/updateproduct")
-    public Product UpdateProduct(ProductDto productDto){
-        return null;
+
+    @PutMapping("/Updateproduct")
+    public Product UpdateProduct(@RequestBody ProductDto productDto){
+        return productService.UpdateProduct(productDto);
     }
 
     @DeleteMapping("/deleteproduct")
-    public Product DeleteProduct(){
-        return null;
-    }*/
+    public void DeleteProduct(@RequestParam int id){
+        productService.DeleteProduct(id);
+    }
 
 
 }
